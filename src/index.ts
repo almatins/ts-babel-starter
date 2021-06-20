@@ -1,10 +1,4 @@
-export class C {
-  private x = 10;
-  getX = () => this.x;
-  setX = (newVal: number) => {
-    this.x = newVal;
-  };
+function sum(a, b) {
+  return a + b;
 }
-
-export const x = new C();
-export const y = { ...{ some: "value" } };
+module.exports = sum;
