@@ -1,4 +1,5 @@
 # TypeScript-Babel-Starter
+
 Original source : https://github.com/microsoft/TypeScript-Babel-Starter
 
 # What is this?
@@ -69,13 +70,8 @@ Then copy the `.babelrc` in this repo, or the below:
 
 ```json
 {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-typescript"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties"
-    ]
+  "presets": ["@babel/preset-env", "@babel/preset-typescript"],
+  "plugins": ["@babel/plugin-proposal-class-properties"]
 }
 ```
 
@@ -96,6 +92,7 @@ Add the following to the `"scripts"` section of your `package.json`
 # How do I change it?
 
 ## Using JSX (and React)
+
 > Full example available [**here**](https://github.com/a-tarasyuk/react-webpack-typescript-babel)
 
 ### Install your dependencies
@@ -121,7 +118,7 @@ Make sure that any files that contain JSX use the `.tsx` extension.
 To get going quickly, just rename `src/index.ts` to `src/index.tsx`, and add the following lines to the bottom:
 
 ```ts
-import React from 'react';
+import React from "react";
 export let z = <div>Hello world!</div>;
 ```
 
@@ -140,26 +137,28 @@ npm install --save-dev webpack webpack-cli babel-loader
 Create a `webpack.config.js` at the root of this project with the following contents:
 
 ```js
-var path = require('path');
+var path = require("path");
 
 module.exports = {
-    // Change to your "entry-point".
-    entry: './src/index',
-    output: {
-        path: path.resolve(__dirname, 'dist'),
-        filename: 'app.bundle.js'
-    },
-    resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json']
-    },
-    module: {
-        rules: [{
-            // Include ts, tsx, js, and jsx files.
-            test: /\.(ts|js)x?$/,
-            exclude: /node_modules/,
-            loader: 'babel-loader',
-        }],
-    }
+  // Change to your "entry-point".
+  entry: "./src/index",
+  output: {
+    path: path.resolve(__dirname, "dist"),
+    filename: "app.bundle.js",
+  },
+  resolve: {
+    extensions: [".ts", ".tsx", ".js", ".json"],
+  },
+  module: {
+    rules: [
+      {
+        // Include ts, tsx, js, and jsx files.
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        loader: "babel-loader",
+      },
+    ],
+  },
 };
 ```
 
@@ -194,19 +193,17 @@ npm install --save-dev rollup @rollup/plugin-babel @rollup/plugin-node-resolve @
 Create a `rollup.config.js` at the root of this project with the following contents:
 
 ```js
-import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
-import babel from '@rollup/plugin-babel';
-import pkg from './package.json';
+import commonjs from "@rollup/plugin-commonjs";
+import resolve from "@rollup/plugin-node-resolve";
+import babel from "@rollup/plugin-babel";
+import pkg from "./package.json";
 
-const extensions = [
-  '.js', '.jsx', '.ts', '.tsx',
-];
+const extensions = [".js", ".jsx", ".ts", ".tsx"];
 
-const name = 'RollupTypeScriptBabel';
+const name = "RollupTypeScriptBabel";
 
 export default {
-  input: './src/index.ts',
+  input: "./src/index.ts",
 
   // Specify here external modules which you don't want to include in your bundle (for instance: 'lodash', 'moment' etc.)
   // https://rollupjs.org/guide/en#external-e-external
@@ -220,25 +217,28 @@ export default {
     commonjs(),
 
     // Compile TypeScript/JavaScript files
-    babel({ extensions, include: ['src/**/*'] }),
+    babel({ extensions, include: ["src/**/*"] }),
   ],
 
-  output: [{
-    file: pkg.main,
-    format: 'cjs',
-  }, {
-    file: pkg.module,
-    format: 'es',
-  }, {
-    file: pkg.browser,
-    format: 'iife',
-    name,
+  output: [
+    {
+      file: pkg.main,
+      format: "cjs",
+    },
+    {
+      file: pkg.module,
+      format: "es",
+    },
+    {
+      file: pkg.browser,
+      format: "iife",
+      name,
 
-    // https://rollupjs.org/guide/en#output-globals-g-globals
-    globals: {},
-  }],
+      // https://rollupjs.org/guide/en#output-globals-g-globals
+      globals: {},
+    },
+  ],
 };
-
 ```
 
 ### Create a build task
